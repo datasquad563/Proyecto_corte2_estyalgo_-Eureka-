@@ -24,7 +24,7 @@ data = [
 
 df = pd.DataFrame(data, columns=["Marca","Modelo","Tipo","Combustible","Consumo","Precio","Maletero","Tracción","Tecnología"])
 
-st.title("🔍 Recomendador de Autos con KNN")
+st.title("🔍 Eureka")
 
 
 tipo = st.selectbox("Tipo de auto", df["Tipo"].unique())
@@ -115,5 +115,6 @@ if st.button("Recomendar"):
                 <p><b>🔗 Similitud:</b> {row['Similitud']:.2f}</p>
             </div>
             """, unsafe_allow_html=True)
+
 
 
