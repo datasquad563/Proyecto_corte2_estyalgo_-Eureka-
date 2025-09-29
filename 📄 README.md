@@ -1,9 +1,9 @@
-# Proyecto_corte1_EDA
-Primera entrega del proyecto del curso Estructuras de datos y algoritmos
+# Proyecto_corte1_EDA_"Eureka"
+Segunda entrega del proyecto del curso Estructuras de datos y algoritmos
 
 ## 🚗 Sistema de Recomendación de Autos
 
-Aplicación desarrollada en **Python + Streamlit** que recomienda vehículos según preferencias de tipo, combustible, consumo, precio y capacidad de maletero.
+Aplicación desarrollada en **Python + Streamlit** que recomienda vehículos según preferencias de tipo, combustible, consumo, precio y capacidad de maletero, agragando un sistema de entrega más limpio, pesos personalizados segun las preferencias del usuario y bases de los algoritmos de tipo KNN.
 
 ---
 
