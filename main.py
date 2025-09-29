@@ -26,7 +26,7 @@ df = pd.DataFrame(data, columns=["Marca","Modelo","Tipo","Combustible","Consumo"
 
 st.title("🔍 Recomendador de Autos con KNN")
 
-# ====== INPUTS ======
+
 tipo = st.selectbox("Tipo de auto", df["Tipo"].unique())
 combustible = st.selectbox("Combustible", df["Combustible"].unique())
 consumo = st.slider("Consumo mínimo (km/L)", 0, 20, 14)
@@ -60,7 +60,7 @@ st.info(f"""
 pesos = np.array([peso_consumo, peso_precio, peso_maletero])
 k = st.slider("Número de recomendaciones (k)", min_value=1, max_value=5, value=3)
 
-# ====== FILTRO OBLIGATORIO ======
+
 df_filtrado = df[
     (df["Tipo"] == tipo) &
     (df["Combustible"] == combustible) &
@@ -72,7 +72,6 @@ if st.button("Recomendar"):
     if df_filtrado.empty:
         st.error("❌ No se encontraron autos que cumplan tus filtros obligatorios.")
     else:
-        # ====== NORMALIZACIÓN ======
         scaler = MinMaxScaler()
         df_scaled = df_filtrado.copy()
         df_scaled[["Consumo","Precio","Maletero"]] = scaler.fit_transform(
@@ -81,22 +80,18 @@ if st.button("Recomendar"):
 
         usuario_vector = np.array([[consumo, (precio_min+precio_max)/2, maletero]])
         usuario_vector = scaler.transform(usuario_vector)
-
-        # Aplicar pesos
+        
         autos_vector = df_scaled[["Consumo","Precio","Maletero"]].values * pesos
         usuario_vector = usuario_vector * pesos
 
-        # Ajuste de k
         k_ajustado = min(k, len(df_scaled))
         if k_ajustado < k:
             st.info(f"ℹ️ Solo hay {len(df_scaled)} autos disponibles, se ajustó k = {k_ajustado}")
 
-        # ====== KNN ======
         knn = NearestNeighbors(n_neighbors=k_ajustado, metric="euclidean")
         knn.fit(autos_vector)
         distancias, indices = knn.kneighbors(usuario_vector)
 
-        # ====== CALCULAR SIMILITUD CORRECTA ======
         similitudes = 1 / (1 + distancias[0])
 
         df_recomendados = df_filtrado.iloc[indices[0]].copy()
@@ -120,4 +115,5 @@ if st.button("Recomendar"):
                 <p><b>🔗 Similitud:</b> {row['Similitud']:.2f}</p>
             </div>
             """, unsafe_allow_html=True)
+
 
