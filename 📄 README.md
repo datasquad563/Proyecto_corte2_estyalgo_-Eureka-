@@ -1,4 +1,4 @@
-# Proyecto_corte1_EDA_"Eureka"
+# Proyecto_corte2_EDA_"Eureka"
 Segunda entrega del proyecto del curso Estructuras de datos y algoritmos
 
 ## 🚗 Sistema de Recomendación de Autos
